@@ -11,9 +11,13 @@ contract Faucet {
     owner = msg.sender;
   }
   
-  // Contract destructor
-  function destroy() public {
+  modifier onlyOwner {
     require(msg.sender == owner);
+    _;
+  }
+  
+  // Contract destructor
+  function destroy() public onlyOwner {
     selfdestruct(owner);
   }
 
