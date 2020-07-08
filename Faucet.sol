@@ -1,8 +1,21 @@
 // Version of Solidity compiler this program was written for
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.22;
 
 // Our first contract is a faucet!
 contract Faucet {
+
+  address owner;
+  
+  // Initialize Faucet contract: set owner
+  constructor() {
+    owner = msg.sender;
+  }
+  
+  // Contract destructor
+  function destroy() public {
+    require(msg.sender == owner);
+    selfdestruct(owner);
+  }
 
   // Give out ether to anyone who asks
   function withdraw(uint withdraw_amount) public {
