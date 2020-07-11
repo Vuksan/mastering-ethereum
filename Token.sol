@@ -6,7 +6,8 @@ contract Token is mortal {
     Faucet _faucet;
 
     constructor() {
-        _faucet = (new Faucet()).value(0.5 ether)();
+        _faucet = new Faucet();
+        _faucet.withdraw(0.5 ether);
     }
 
     function destroy() onlyOwner {
